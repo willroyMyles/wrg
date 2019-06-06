@@ -1,0 +1,17 @@
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<%- include('partials/login_jumbotron') %> 
+
+<div class="container">
+
+
+<% for (element of data){ %>
+   <div class="row">
+  <div class="col col-md-7"><%= element.name %></div>
+  <div class="col col-md-4 offset-md-1"><%= element.price %></div>
+</div> 
+  <% } %>
