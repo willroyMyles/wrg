@@ -1,3 +1,6 @@
+    <%- include('partials/navbar') %> 
+
+
 <br>
 <br>
 <br>
@@ -8,10 +11,12 @@
 
 <div class="container">
 
-
-<% for (element of data){ %>
+<% if(data) for (element of data){ %>
    <div class="row">
   <div class="col col-md-7"><%= element.name %></div>
   <div class="col col-md-4 offset-md-1"><%= element.price %></div>
 </div> 
   <% } %>
+
+
+   <%- include('partials/footer') %>

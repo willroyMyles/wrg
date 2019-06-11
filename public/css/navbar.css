@@ -6,10 +6,6 @@ body {
     font-size: 12px;
 }
 
-.container {
-    min-height: 100vh;
-}
-
 ul {
     margin: 0;
     padding: 0;
@@ -25,7 +21,7 @@ li {
 nav {
     text-align: center;
     width: 100%;
-    position: relative;
+    position: fixed;
     height: auto;
     overflow: hidden;
     background: none;
