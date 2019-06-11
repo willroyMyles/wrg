@@ -53,15 +53,10 @@ nav ul li a:hover {
 }
 
 .row {
-    border: 1px solid rgba(197, 67, 67, 0.089);
-    padding: 10px
+    border: 1px solid rgba(228, 74, 74, 0);
 }
 
 .col {
     border: 1px solid black;
     padding: 5px;
-}
-
-.half-jumbo {
-    height: 50vh;
 }

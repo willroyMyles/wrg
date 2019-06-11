@@ -1,13 +1,6 @@
     <%- include('partials/navbar') %> 
 
-
-<br>
-<br>
-<br>
-<br>
-<br>
-
-<%- include('partials/login_jumbotron') %> 
+<%- include('partials/jumbotron') %> 
 
 <div class="container">
 
@@ -17,6 +10,12 @@
   <div class="col col-md-4 offset-md-1"><%= element.price %></div>
 </div> 
   <% } %>
+
+
+  // sections
+  <div class="container">
+  <%- include('partials/sections/bodyParts_section') %>
+  </div>
 
 
    <%- include('partials/footer') %>
