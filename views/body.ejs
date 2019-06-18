@@ -5,18 +5,33 @@
 
 <div class="container">
 
-<% if(data) for (element of data){ %>
-   <div class="row">
-  <div class="col col-md-7"><%= element.name %></div>
-  <div class="col col-md-4 offset-md-1"><%= element.price %></div>
-</div> 
-  <% } %>
+  
 
-  <div class="container">
-  <%- include('partials/sections/bodyParts_section') %>
-  <%- include('partials/sections/bss') %>
-  <%- include('partials/sections/engine') %>
+<div class="col-md-3 offset-md-1">
+  
+</div>
+<% for( let index = 0; index < data.length; index++ ) { %>
+    <div class="container">
+<div class="col-md-8">
+ <div class="row">
+      <h1><%-data[index][0]%></h1>
+               </div>
+      <div class="row link-below">
+     <p><a href="<%-data[index][0]%>">view all posts</a></p>
   </div>
-
-
+        <% for( let i = 2; i < data[index].length; i++ ) { %>
+           <div class="row">
+           <div class="col-md-9">
+                   <h4><%-data[index][i]%></h3>
+           </div>
+            <div class="col-md-3">
+                   <button type="button" class="btn btn-md btn-primary">view posts -></button>
+           </div>
+       </div>
+       
+        <% } %>
+</div>
+    </div>
+    <br> <br>
+<% } %>
    <%- include('partials/footer') %>

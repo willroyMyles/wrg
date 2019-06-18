@@ -14,7 +14,7 @@ module.exports = async(app) => {
     app.parts = partsArr;
 
     app.get('/', (req, res) => {
-        res.render('body', { data: false, login: false });
+        res.render('body', { data: app.parts, login: false });
     });
 
     app.get('/signin', (req, res) => {
