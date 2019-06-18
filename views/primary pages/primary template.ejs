@@ -1,0 +1,21 @@
+<%- include('../partials/navbar') %> 
+
+
+<div class="container-fluid">
+<div class="row">
+    <h6><a href="">back</a></h1>
+</div>
+
+<div class="row">
+<div class="col-md-10 offset-md-1">
+<div class="row">
+        <h1 class="display-3"><%- title  %> </h6>
+</div>
+
+        <ul class="list-inline">
+        <% for( let index = 0; index < links.length; index++ ) { %>
+            <li class="list-inline-item cat-links my-2"><a href=""><%- links[index] %></a></li>
+        <% } %>
+    </ul>
+</div>
+</div>
