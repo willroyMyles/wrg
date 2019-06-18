@@ -1,6 +1,7 @@
     <%- include('partials/navbar') %> 
 
-<%- include('partials/jumbotron') %> 
+<%- include('partials/jumbotron', {success: login}) %> 
+ 
 
 <div class="container">
 
@@ -11,10 +12,10 @@
 </div> 
   <% } %>
 
-
-  // sections
   <div class="container">
   <%- include('partials/sections/bodyParts_section') %>
+  <%- include('partials/sections/bss') %>
+  <%- include('partials/sections/engine') %>
   </div>
 
 

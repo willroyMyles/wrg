@@ -1,7 +1,7 @@
 module.exports = async(app) => {
 
     app.get('/', (req, res) => {
-        res.render('body', { data: false });
+        res.render('body', { data: false, login: false });
     });
 
     app.get('/signin', (req, res) => {

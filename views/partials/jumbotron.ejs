@@ -1,12 +1,14 @@
 <div class="container-fluid head">
     <div class="container">
         <h1 class="display-3">Welcome to WRG Auto</h1>
+        
+        <% if(!success){%>
         <p class="lead">sign in to get started</p>
         <hr class="my-2">
-        <% if(true){%>
         <%- include('login_partial') %>
         <% } %>
         <br><br>
         <%- include('selects/category_selector') %>
+      
     </div>
 </div>
