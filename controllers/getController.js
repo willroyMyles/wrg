@@ -47,22 +47,10 @@ module.exports = async(app) => {
                 const element = app.parts[index.first][i];
                 opts.push(element);
             }
-            res.render('primary pages/primary template', { title: app.parts[index.first][index.second], links: opts })
+            if (index.second == 0) res.render('primary pages/primary template', { title: app.parts[index.first][index.second], links: opts, highlighted: { first: index.first, second: index.second } })
+            else res.render('primary pages/primary template', { title: app.parts[index.first][0], links: opts, highlighted: { first: index.first, second: index.second } })
         })
     })
-
-    app.get('/' + routeText, async(req, res) => {
-        var t = app.parts[2][0];
-        var opts = [];
-        for (let index = 1; index < app.parts[2].length; index++) {
-            const element = app.parts[2][index];
-            opts.push(element);
-        }
-        res.render('primary pages/primary template', { title: app.parts[2][0], links: opts })
-    })
-
-
-
 
     function getIndexOfRoute(route) {
         var val = route.replace(/%20/g, ' ');

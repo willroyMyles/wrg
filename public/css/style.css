@@ -1,5 +1,9 @@
 /* Other Classes for Page Styling */
 
+body {
+    background-color: rgb(240, 242, 245)
+}
+
 footer {
     width: 100%;
 }
@@ -29,16 +33,34 @@ footer {
 }
 
 .cat-links a {
-    color: rgb(110, 110, 110);
-    border: 1px solid rgb(104, 104, 104);
-    padding: 4px 4px;
-    border-radius: 3px;
+    color: rgba(110, 110, 110, .64);
+}
+
+.current a {
+    color: black;
+}
+
+.cat-links {
+    color: rgba(110, 110, 110, 0.644);
+    border: 1px solid rgba(110, 110, 110, 0.644);
+    padding: 6px 6px;
+    border-radius: 30px;
     font-size: 14px;
     text-decoration: none;
     transition: 1s;
 }
 
-.cat-links a:hover {
+.cat-links:hover {
+    border-color: green;
+}
+
+.current {
+    background-color: rgba(130, 158, 179, 0.425);
+    border: 1px solid rgba(110, 110, 110, 0.205);
     color: black;
-    border-color: black;
+}
+
+.masthead {
+    height: 80vh;
+    min-height: 500px;
 }
