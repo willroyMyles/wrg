@@ -8,6 +8,12 @@ footer {
     width: 100%;
 }
 
+.welcome {
+    background-color: rgba(255, 255, 255, 0.644);
+    border-radius: 5px;
+    padding: 25px;
+}
+
 .head {
     /* background-color: aliceblue; */
     padding: 20px 20px 60px 20px;
@@ -63,4 +69,43 @@ footer {
 .masthead {
     height: 80vh;
     min-height: 500px;
+}
+
+.z-index {
+    z-index: 500;
+}
+
+.sep {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: rgb(173, 173, 173);
+}
+
+.sepText {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+}
+
+.sepText::before,
+.sepText::after {
+    content: '';
+    flex: 1;
+    width: 1px;
+    background: currentColor;
+    /* matches font color */
+    margin: .25em;
+}
+
+#searcher {
+    text-align: center;
+}
+
+.fa-search {
+    color: rgb(175, 175, 175);
+    position: absolute;
+    left: 43px;
 }

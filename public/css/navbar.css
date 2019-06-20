@@ -1,62 +1,48 @@
-body {
-    margin: 0;
-    padding: 0;
-    background: #fff;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 12px;
+.logo {
+    color: rgb(87, 87, 87);
+    font-size: 30px;
 }
 
-ul {
-    margin: 0;
-    padding: 0;
+.nav-link1 {
+    color: rgb(126, 126, 126);
+    font-size: 17px;
+    padding: 10px;
+    position: relative;
+    z-index: 0;
+    cursor: pointer;
     text-decoration: none;
-    list-style: none;
+    font-weight: 600;
 }
 
-li {
-    padding: 0;
-    margin: 0;
-}
-
-nav {
-    text-align: center;
-    width: 100%;
-    position: fixed;
-    height: auto;
+div.highlightTextIn a:before {
+    position: absolute;
+    color: rgb(54, 54, 54);
+    padding: 10px;
     overflow: hidden;
-    background: none;
-}
-
-nav ul {
-    text-align: center;
-}
-
-nav ul li {
-    display: inline-block;
-}
-
-nav ul li a {
-    color: #333;
-    display: inline-block;
-    padding: 1em 3em;
+    content: attr(alt);
+    transition: all 0.3s;
+    transform: scale(0);
+    opacity: 0;
     text-decoration: none;
-    border-bottom: 2px solid #fff;
-    transition-property: all .2s linear 0s;
-    -moz-transition: all .2s linear 0s;
-    -webkit-transition: all .2s linear 0s;
-    -o-transition: all .2s linear 0s;
-    font-size: 16px;
+    top: -.2em;
+    left: -.2px;
 }
 
-nav ul li a:hover {
-    color: #34B484;
+div.highlightTextIn a:hover:before {
+    transform: scale(1);
+    opacity: 1;
+    text-decoration: none;
 }
 
-.row {
-    border: 1px solid rgba(228, 74, 74, 0);
+
+/* Highlight text in  */
+
+div.highlightTextIn a {
+    color: rgb(155, 155, 155);
+    text-decoration: none;
 }
 
-.col {
-    border: 1px solid black;
-    padding: 5px;
+div.highlightTextIn a:before {
+    transform: scale(1.2);
+    text-decoration: none;
 }

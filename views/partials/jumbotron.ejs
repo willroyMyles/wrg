@@ -1,14 +1,35 @@
-<div class="container-fluid head">
+<div class="container my-5 welcome">
     <div class="container">
-        <h1 class="display-3">Welcome to WRG Auto</h1>
-        
-        <% if(!success){%>
-        <p class="lead">sign in to get started</p>
-        <hr class="my-2">
-        <%- include('login_partial') %>
-        <% } %>
+        <p class="lead">Welcome to WRG Auto</p>
+
+
+        <div class="row">
+            <div class="col-md-3">
+                <% if(!success){%>
+                    <hr class="my-2">
+                    <%- include('login_partial') %>
+                        <% } %>
+            </div>
+
+            <%- include('vertical divider') %>
+
+                <div class="col-md-4">
+                    <hr class="my-2">
+                    <%- include('category_selector') %>
+
+                </div>
+
+                <%- include('vertical divider') %>
+
+                    <div class="col-md-3">
+                        <hr class="my-2">
+                        <%- include('search') %>
+
+                    </div>
+        </div>
+
+
         <br><br>
-        <%- include('selects/category_selector') %>
-      
+
     </div>
 </div>

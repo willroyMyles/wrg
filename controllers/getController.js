@@ -47,8 +47,7 @@ module.exports = async(app) => {
                 const element = app.parts[index.first][i];
                 opts.push(element);
             }
-            if (index.second == 0) res.render('primary pages/primary template', { title: app.parts[index.first][index.second], links: opts, highlighted: { first: index.first, second: index.second } })
-            else res.render('primary pages/primary template', { title: app.parts[index.first][0], links: opts, highlighted: { first: index.first, second: index.second } })
+            res.render('primary pages/primary template', { title: app.parts[index.first][0], links: opts, highlighted: { first: index.first, second: index.second } })
         })
     })
 
