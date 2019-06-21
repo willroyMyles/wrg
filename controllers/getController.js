@@ -12,11 +12,13 @@ module.exports = async(app) => {
     app.parts = partsArr;
 
     app.get('/', (req, res) => {
-        res.render('body', { data: app.parts, login: false });
+        console.log(req.user);
+        console.log(req.isAuthenticated());
+        res.render('body', { data: app.parts, login: false, name: req.user == undefined ? false : req.user.username });
     });
 
-    app.get('/signin', (req, res) => {
-        res.render('signin')
+    app.get('/login', (req, res) => {
+        res.render('login')
     })
 
     app.get('/index', async(req, res) => {
@@ -47,7 +49,7 @@ module.exports = async(app) => {
                 const element = app.parts[index.first][i];
                 opts.push(element);
             }
-            res.render('primary pages/primary template', { title: app.parts[index.first][0], links: opts, highlighted: { first: index.first, second: index.second } })
+            res.render('primary pages/primary template', { title: app.parts[index.first][0], links: opts, highlighted: { first: index.first, second: index.second }, name: req.user == undefined ? false : req.user.username });
         })
     })
 

@@ -109,3 +109,38 @@ footer {
     position: absolute;
     left: 43px;
 }
+
+.border-personal {
+    border: 1px solid rgb(161, 161, 161);
+    border-radius: 3px;
+    padding: 10px;
+}
+
+.login-cont {
+    background-color: white;
+    padding: 35px 35px 5px 35px;
+    border-radius: 5px;
+}
+
+input {
+    border: none;
+    background-color: transparent;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
+
+.iconp {
+    min-width: 0px;
+    color: rgb(151, 151, 151);
+}
+
+.input1 {
+    background-color: rgb(255, 255, 255) !important;
+    outline: none;
+    outline-width: 0px;
+}

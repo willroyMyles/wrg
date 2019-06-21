@@ -9,10 +9,46 @@
             <div class="col-md-5 offset-md-7 text-right">
                 <a href="/" class="nav-link1" alt="Home">Home</a>
                 <a href="/" class="nav-link1" alt="Forum">Forum</a>
-                <a href="" class="nav-link1" alt="Login">Login</a>
-                <a href="" class="nav-link1" alt="Sign up">Sign up</a>
+
+                <% if(name != false){%>
+                    <!-- <div class="btn-group" role="group" aria-label="Button group">
+
+                        <a href="" class="nav-link1" id="user" alt="<%= name %>">
+                            <%= name %>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="my-dropdown">
+                            <a class="dropdown-item active" href="#">Text</a>
+                        </div>
+                    </div> -->
+
+                    <div class="btn-group">
+                        <a href="#" alt="<%= name %>" class="nav-link1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <%= name %>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" id="logout" href="#">log out</a>
+                        </div>
+                    </div>
+                    <a href=""><i class="fa fa-cog" aria-hidden="true"></i></a>
+
+
+                    <%} else {%>
+                        <a href="login" class="nav-link1" alt="Login">Login</a>
+                        <a href="" class="nav-link1" alt="Sign up">Sign up</a>
+                        <%}%>
             </div>
 
         </div>
     </div>
 </div>
+
+<script>
+    $('#logout').on('click', () => {
+        console.log('something happening');
+        $.post('/logout', {});
+    })
+</script>

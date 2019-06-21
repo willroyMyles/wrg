@@ -1,46 +1,17 @@
 module.exports = async(app) => {
 
-    var mongoose = require('mongoose');
-    mongoose.connect('mongodb+srv://user:cq8raK4jHEo2JngM@wrg-y3jqo.mongodb.net/test?retryWrites=true&w=majority', { useNewUrlParser: true })
-    var User = require('../models/user');
-
-    var currentUser;
 
     console.log(await User.collection.estimatedDocumentCount())
 
-    async function login(body) {
-        await User.findOne({ username: body.username, password: body.password }, (err, res) => {
-            currentUser = res;
-        });
-        return currentUser;
+
+    function authenticationMiddleware() {
+        return (req, res, next) => {
+            console.log(`req.session.passport.user: ${JSON.stringify(req.session.passport)}`);
+
+            if (req.isAuthenticated()) return next();
+            res.redirect('/login')
+        }
     }
-    async function logout() {
-        currentUser = null;
-    }
-
-    async function saveUser(body) {
-        var Id = await User.collection.estimatedDocumentCount() + 1;
-        var user = {
-            username: body.username,
-            password: body.password,
-            posts: null,
-            _id: Id
-        };
-        User.findOne({ username: body.username, password: body.password }, (err, res) => {
-            console.log(res);
-            if (res) return false;
-            else {
-                User(user).save((err) => {
-                    if (err) console.log(err);
-                    return true;
-
-                });
-            }
-        });
-
-    }
-
-
 
 
 

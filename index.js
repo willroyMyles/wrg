@@ -8,6 +8,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(expressLayouts);
 app.set('view engine', 'ejs');
 
+//authentication
+//mot to another file soon
+
+
 
 start()
 
@@ -20,6 +24,6 @@ function start() {
     app.listen(port);
     console.log("listening on port " + port);
 
-    var gc = require('./controllers/getController')(app);
     var pc = require('./controllers/postController')(app);
+    var gc = require('./controllers/getController')(app);
 }
