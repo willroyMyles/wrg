@@ -24,6 +24,7 @@ function start() {
     app.listen(port);
     console.log("listening on port " + port);
 
+
     var pc = require('./controllers/postController')(app);
     var gc = require('./controllers/getController')(app);
 }

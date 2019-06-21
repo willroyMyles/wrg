@@ -73,6 +73,37 @@ module.exports = async(app) => {
         }
     ));
 
+    passport.use('local-signup', new LocalStrategy(
+        (username, password, done) => {
+            console.log('using passport strtegy')
+
+            User.findOne({ username: username }, async(err, res) => {
+                console.log(err);
+                if (err) return done(err);
+                if (res) return done(null, false, req.flash('signupMessage', 'username taken'));
+                else {
+                    var Id = await User.collection.estimatedDocumentCount() + 1;
+                    var user = {
+                        username: username,
+                        password: password,
+                        posts: null,
+                        _id: Id
+                    };
+                    User(user).save((err) => {
+                        console.log(err);
+
+                        if (err) return done(err)
+                        return done(null, user);
+
+                    });
+                }
+
+            });
+
+        }
+    ));
+
+
 
 
     function authenticationMiddleware() {
@@ -83,23 +114,19 @@ module.exports = async(app) => {
             res.redirect('/login')
         }
     }
-    app.post('/signUp', async(req, res) => {
-        var status = await db.saveUser(req.body);
-        res.render('body', { data: false, login: status });
-    })
+    app.post('/signup', passport.authenticate('local-signup', {
+        successRedirect: '/',
+        failuerRedirect: '/signup',
+        failuerFlash: true
+    }));
+
+    app.post('/validate', (req, res) => {
+        res.send("");
+    });
 
 
 
     //database stuff
-    async function login(body) {
-        await User.findOne({ username: body.username, password: body.password }, (err, res) => {
-            currentUser = res;
-        });
-        return currentUser;
-    }
-    async function logout() {
-        currentUser = null;
-    }
 
     async function saveUser(body) {
         var Id = await User.collection.estimatedDocumentCount() + 1;
@@ -114,7 +141,7 @@ module.exports = async(app) => {
             if (res) return false;
             else {
                 User(user).save((err) => {
-                    if (err) console.log(err);
+                    if (err) return false;
                     return true;
 
                 });

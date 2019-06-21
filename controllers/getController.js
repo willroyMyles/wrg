@@ -21,6 +21,10 @@ module.exports = async(app) => {
         res.render('login')
     })
 
+    app.get('/signup', (req, res) => {
+        res.render('sign up');
+    });
+
     app.get('/index', async(req, res) => {
         function run() {
             var arr = [];
@@ -45,7 +49,7 @@ module.exports = async(app) => {
             var index = getIndexOfRoute(val);
             var opts = [];
             console.log(index);
-            for (let i = 1; i < app.parts[index.first].length; i++) {
+            for (let i = 0; i < app.parts[index.first].length; i++) {
                 const element = app.parts[index.first][i];
                 opts.push(element);
             }
