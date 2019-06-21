@@ -35,6 +35,10 @@
                     </div>
                     <a href=""><i class="fa fa-cog" aria-hidden="true"></i></a>
 
+                    <form name='myForm' action="/logout" method='post'>
+                        <input type="hidden" name="thisIsTheParameterName" value="logout" />
+                    </form>
+
 
                     <%} else {%>
                         <a href="login" class="nav-link1" alt="Login">Login</a>
@@ -48,7 +52,6 @@
 
 <script>
     $('#logout').on('click', () => {
-        console.log('something happening');
-        $.post('/logout', {});
+        document.forms["myForm"].submit();
     })
 </script>

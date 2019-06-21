@@ -37,6 +37,10 @@ module.exports = async(app) => {
 
     app.post('/logout', (req, res) => {
         console.log('logout called');
+        req.logout();
+        req.session.destroy();
+        res.redirect('/');
+
     });
 
     app.post('/login',
