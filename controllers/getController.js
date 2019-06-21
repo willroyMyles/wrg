@@ -80,4 +80,11 @@ module.exports = async(app) => {
         return { first, second };
 
     }
+
+
+    app.get('/create-post', (req, res) => {
+        if (req.isAuthenticated) var val = req.user.username
+        else var val = false
+        res.render('primary pages/create post', { name: val });
+    })
 }

@@ -4,6 +4,8 @@ var expressLayouts = require('express-ejs-layouts');
 
 var app = express();
 app.use(express.static('./public'));
+app.use('/scripts', express.static(__dirname + '/node_modules/'));
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(expressLayouts);
 app.set('view engine', 'ejs');
