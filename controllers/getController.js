@@ -5,6 +5,7 @@ module.exports = async(app) => {
     const csv = fs.readFileSync('parts.txt', 'utf8');
     var partsArr = [];
     Papa.parse(csv, {
+        dynamicTyping: true,
         complete: function(results) {
             partsArr = results.data;
         }
@@ -83,8 +84,13 @@ module.exports = async(app) => {
 
 
     app.get('/create-post', (req, res) => {
-        if (req.isAuthenticated) var val = req.user.username
-        else var val = false
-        res.render('primary pages/create post', { name: val });
+        if (req.isAuthenticated) {
+            var origin = req.query;
+            console.log(app.parts[origin.main]);
+            var val = req.user.username
+            res.render('primary pages/create post', { name: val, array: app.parts, first: origin.main, second: origin.second });
+        } else {
+            res.redirect('/login').end('please login');
+        }
     })
 }

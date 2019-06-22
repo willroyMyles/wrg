@@ -1,21 +1,65 @@
 <%- include('../partials/navbar') %>
 
+    <div class="container">
+        <div class="row">
+            <div class="col col-md-12">
+                <h3 for="" class="my-1 mx-1 text-muted">Create a post</h3>
+
+                <hr>
+            </div>
+        </div>
+    </div>
+
+
     <form method="post" action="/create/post">
-        <div class="container">
-            <div class="row">
+        <div class="container post-box">
+            <div class="row ">
                 <div class="col col-md-12">
-                    <label for="" class="my-1 mx-1 text-muted">Title</label>
-                    <input class="form-control" type="text" placeholder="" aria-label="Recipient's " aria-describedby="">
+                </div>
+            </div>
+            <div class="row my-2">
+                <div class="col  col-md-12">
+                    <input class="form-control" type="text" name="" placeholder="Title goes here...">
+
+                    <div id="editor" class="" placeholder="Type here ... "></div>
                 </div>
             </div>
 
-            <br>
-            <div class="row my-2">
-                <div class="col  col-md-12">
-                    <label for="" class=" mx-1 text-muted">Body</label>
-                    <div id="editor" class="" placeholder="Type here ... ">a wide ass div</div>
+            <div class="row my-n4 breadcrumb">
+                <div class="col col-md-2 ">
+                    <select name="Category" id="category" class=" justify-content-center form-control">
+                                            <% for(var i =0; i < array.length; i++) { %>
+
+                                                <option value="<%-array[i][0]%>"><%-array[i][0]%></option>
+
+                                                <%}%>
+                                          </select>
+                </div>
+
+                <div class="col col-md-2">
+                    <select id="sub-category" class="form-control" name="">
+                        <% for(var i =1; i < array[first].length; i++) { %>
+                            <option value="<%-array[first][i]%>"><%-array[first][i]%></option>
+
+                            <%}%>
+                                                        </select>
+                </div>
+
+
+
+                <div class="col col-md-3 offset-5">
+                    <a name="btn" id="btn" class="btn btn-secondary btn-block" href="#" role="button"><i class="fa fa-plus" aria-hidden="true"></i> Post</a>
                 </div>
             </div>
+            <div class="row">
+                <div class="col col-md-4 my-4">
+                    <div class="form-check form-check-inline">
+                        <input id="my-input" class="form-check-input" type="checkbox" name="" value="true">
+                        <label for="my-input" class="form-check-label text-muted">Send reply notifications</label>
+                    </div>
+                </div>
+            </div>
+        </div>
         </div>
     </form>
 
@@ -23,30 +67,59 @@
     <link rel="stylesheet" href="scripts/trumbowyg/dist/ui/trumbowyg.min.css">
 
     <script>
+        $(document).ready((e) => {
+            // var first = '<%- first %>';
+            // var second = '<%- second %>';
+            // console.log(first)
+            // $('#category').val(first).trigger('change');
+            // $('#sub-category').val(second).trigger('change');
+        })
+
+
+        var arr = <%- JSON.stringify(array) %>;
+        var first = <%- JSON.stringify(first) %>;
+        var second = <%- JSON.stringify(second) %>;
+        $('#sub-category').val(arr[first][second]).trigger('change');
+
+
         $('#editor').trumbowyg();
-    </script>
+        console.log('<%-first%>');
 
-    <!-- <script src="scripts/easyeditor/src/jquery.easyeditor.js"></script>
-    <link rel="stylesheet" href="scripts/easyeditor/src/easyeditor.1.css">
+        $('#category').change((e) => {
+            console.log($("#category option:selected").index())
+                //remove current options
+            $('#sub-category option').remove();
+
+            var arr = <%- JSON.stringify(array) %>;
+            var i = $("#category option:selected").index();
+
+            //add new options
+            for (let index = 1; index < arr[i].length; index++) {
+                const element = arr[i][index];
+                console.log(element);
+                $(' <option value="' + element + '">' + element + '</option>').appendTo($('#sub-category'));
+            }
+
+        })
 
 
-    <script>
-        jQuery(document).ready(function($) {
-            var easyEditor = new EasyEditor('#editor', {
-                buttons: ['bold', 'italic', 'link', 'alignleft', 'aligncenter', 'alignright', 'quote', 'code', 'image', 'youtube', 'x'],
-                buttonsHtml: {
-                    'bold': '<i class="fa fa-bold"></i>',
-                    'italic': '<i class="fa fa-italic"></i>',
-                    'link': '<i class="fa fa-link"></i>',
-                    'align-left': '<i class="fa fa-align-left"></i>',
-                    'align-center': '<i class="fa fa-align-center"></i>',
-                    'align-right': '<i class="fa fa-align-right"></i>',
-                    'quote': '<i class="fa fa-quote-left"></i>',
-                    'code': '<i class="fa fa-code"></i>',
-                    'insert-image': '<i class="fa fa-picture-o"></i>',
-                    'insert-youtube-video': '<i class="fa fa-youtube"></i>',
-                    'remove-formatting': '<i class="fa fa-ban"></i>'
+
+        $('#btn').on('click', (e) => {
+            console.log($('textarea').val())
+            $.ajax({
+                type: "post",
+                url: '/create/post',
+                success: function(data, text) {
+                    //success code here.
+                    $('#sub').click();
+
                 },
+                error: function(request, status, error) {
+                    //error handling here.
+                    console.log(error);
+                    console.log("error");
+                    $('.alert').show();
+                }
             });
         });
-    </script> -->
+    </script>

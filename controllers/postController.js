@@ -124,6 +124,11 @@ module.exports = async(app) => {
         res.send("");
     });
 
+    app.post('/create/post', (req, res) => {
+        console.log('recieved');
+        res.render('sign up');
+    })
+
 
 
     //database stuff
