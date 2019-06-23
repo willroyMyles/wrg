@@ -19,15 +19,15 @@
             </div>
             <div class="row my-2">
                 <div class="col  col-md-12">
-                    <input class="form-control" type="text" name="" placeholder="Title goes here...">
+                    <input class="form-control" type="text" name="" id="title" placeholder="Title goes here...">
 
                     <div id="editor" class="" placeholder="Type here ... "></div>
                 </div>
             </div>
 
-            <div class="row my-n4 breadcrumb">
-                <div class="col col-md-2 ">
-                    <select name="Category" id="category" class=" justify-content-center form-control">
+            <div class="row my-n4">
+                <div class="col col-md-4 ">
+                    <select name="Category" id="category" class=" justify-content-center form-control category">
                                             <% for(var i =0; i < array.length; i++) { %>
 
                                                 <option value="<%-array[i][0]%>"><%-array[i][0]%></option>
@@ -36,8 +36,8 @@
                                           </select>
                 </div>
 
-                <div class="col col-md-2">
-                    <select id="sub-category" class="form-control" name="">
+                <div class="col col-md-4">
+                    <select id="sub-category" class="form-control category" name="">
                         <% for(var i =1; i < array[first].length; i++) { %>
                             <option value="<%-array[first][i]%>"><%-array[first][i]%></option>
 
@@ -47,14 +47,14 @@
 
 
 
-                <div class="col col-md-3 offset-5">
-                    <a name="btn" id="btn" class="btn btn-secondary btn-block" href="#" role="button"><i class="fa fa-plus" aria-hidden="true"></i> Post</a>
+                <div class="col col-md-3 offset-1">
+                    <a name="btn" id="btn" class="btn btn-secondary btn-block" href="" role="button"><i class="fa fa-plus" aria-hidden="true"></i> Post</a>
                 </div>
             </div>
             <div class="row">
                 <div class="col col-md-4 my-4">
                     <div class="form-check form-check-inline">
-                        <input id="my-input" class="form-check-input" type="checkbox" name="" value="true">
+                        <input id="notify" class="form-check-input" type="checkbox" name="" value="">
                         <label for="my-input" class="form-check-label text-muted">Send reply notifications</label>
                     </div>
                 </div>
@@ -72,8 +72,8 @@
             // var second = '<%- second %>';
             // console.log(first)
             // $('#category').val(first).trigger('change');
-            // $('#sub-category').val(second).trigger('change');
-        })
+            // $('#sub-category').va
+        });
 
 
         var arr = <%- JSON.stringify(array) %>;
@@ -106,12 +106,23 @@
 
         $('#btn').on('click', (e) => {
             console.log($('textarea').val())
+            var request = {
+                title: $('#title').val(),
+                body: $('textarea').val(),
+                category: $('#category option:selected').val(),
+                category_index: $('#category option:selected').index(),
+                sub_category: $('#sub-category option:selected').val(),
+                sub_category_index: $('#sub-category option:selected').index(),
+                notification: $('#notify').val()
+            }
             $.ajax({
                 type: "post",
                 url: '/create/post',
+                data: request,
                 success: function(data, text) {
                     //success code here.
-                    $('#sub').click();
+                    //$('#sub').click();
+                    //window.location.href = '/';
 
                 },
                 error: function(request, status, error) {

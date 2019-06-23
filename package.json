@@ -12,6 +12,7 @@
         "express-ejs-layouts": "^2.5.0",
         "express-session": "^1.16.2",
         "jquery": "^3.4.1",
+        "moment": "^2.24.0",
         "mongoose": "^5.5.13",
         "nodemon": "^1.19.1",
         "papaparse": "^5.0.0",

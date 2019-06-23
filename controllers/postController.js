@@ -3,6 +3,7 @@ module.exports = async(app) => {
 
     var passport = require('passport')
     var User = require('../models/user');
+    var Post = require('../models/posts')
 
     var mongoose = require('mongoose');
     mongoose.connect('mongodb+srv://user:cq8raK4jHEo2JngM@wrg-y3jqo.mongodb.net/test?retryWrites=true&w=majority', { useNewUrlParser: true })
@@ -124,10 +125,27 @@ module.exports = async(app) => {
         res.send("");
     });
 
-    app.post('/create/post', (req, res) => {
-        console.log('recieved');
+    app.post('/create/post', async(req, res, error) => {
+        console.log(req.body);
+        var Id = await Post.collection.estimatedDocumentCount() + 1;
+        var post = {
+            _id: Id,
+            userId: req.user._id,
+            title: req.body.title,
+            body: req.body.body,
+            category: req.body.category_index,
+            sub_category: req.body.sub_category_index,
+            replies: []
+        }
+
+        Post(post).save((err) => {
+            if (err) return error;
+        })
+
         res.render('sign up');
     })
+
+
 
 
 
