@@ -1,5 +1,8 @@
 module.exports = async(app) => {
 
+    var db = require('./databaseController');
+    db.db(app);
+
     var Papa = require('papaparse');
     var fs = require('fs');
     const csv = fs.readFileSync('parts.txt', 'utf8');
