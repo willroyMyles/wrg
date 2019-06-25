@@ -1,5 +1,7 @@
 module.exports = async(app) => {
 
+    var moment = require('moment');
+
     var db = require('./databaseController');
     db.db(app);
 
@@ -49,17 +51,40 @@ module.exports = async(app) => {
     });
 
     routeText.forEach((val, index) => {
-        app.get('/' + val, (req, res) => {
+        app.get('/' + val, async(req, res) => {
             var index = getIndexOfRoute(val);
             var opts = [];
-            console.log(index);
             for (let i = 0; i < app.parts[index.first].length; i++) {
                 const element = app.parts[index.first][i];
                 opts.push(element);
             }
-            res.render('primary pages/primary template', { title: app.parts[index.first][0], links: opts, highlighted: { first: index.first, second: index.second }, name: req.user == undefined ? false : req.user.username });
+
+            var posts = await formatPostsToCard(await db.getPosts());
+            console.log(posts);
+            res.render('primary pages/primary template', { title: app.parts[index.first][0], links: opts, highlighted: { first: index.first, second: index.second }, name: req.user == undefined ? false : req.user.username, cardInfo: posts });
         })
     })
+
+    async function formatPostsToCard(posts) {
+        var cardInfo = [];
+        console.log(moment(Date(), "hh:mm"));
+
+        for (let index = 0; index < posts.length; index++) {
+            const element = posts[index];
+
+            var cardData = {};
+            var newbod = String(element.body).split('>')[1] + "...";
+            cardData.title = element.title;
+            cardData.body = newbod;
+            cardData.category = app.parts[element.category][element.subcategory];
+            cardData.username = (await db.getUserName(element.userId)).username;
+            cardData.time = element.time; //moment(element.time).format("LLLL  LT")
+            cardInfo.push(cardData);
+
+        }
+
+        return cardInfo;
+    }
 
     function getIndexOfRoute(route) {
         var val = route.replace(/%20/g, ' ');
@@ -96,4 +121,6 @@ module.exports = async(app) => {
             res.redirect('/login').end('please login');
         }
     })
+
+
 }

@@ -39,9 +39,18 @@
             </div>
         </div>
 
+        <div class="container">
+            <div class="row">
+                <div class="col col-md-8">
+                    <% console.log(cardInfo) %>
+                        <% for(let i=0; i < cardInfo.length; i++){ %>
+                            <%- include('../partials/card', {info : cardInfo[i]}) %>
+                                <%}%>
+                </div>
+            </div>
+        </div>
+
         <div class="container my-4 h-100">
-
-
             <% if (true) { %>
                 <header class="masthead">
                     <div class="container h-100">

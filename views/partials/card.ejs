@@ -1,0 +1,39 @@
+<div class="container personal-card">
+    <div class="row">
+        <div class="col col-md-3 img-circle img-thumbnail">
+            <img src="image/logo.png" alt="suspension">
+        </div>
+        <div class="col col-md-9">
+            <div class=" row title text-capitalize">
+                <div class="col col-md-10">
+                    <a href="">
+                        <%-info.title%><i class="fa fa-arrow-alt-circle-right"></i>
+
+                    </a>
+
+                </div>
+            </div>
+            <div class="row text-secondary">
+                <div class="col col-md-10">
+                    <div class="text">
+                        <span><%- info.body %></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row my-1">
+                <div class="col col-md-7 text-muted">
+                    <div class="small-text">posted by -
+                        <a href="">
+                            <%- info.username %>
+                        </a>
+                    </div>
+                    <div class="small-text">
+                        <%- info.time%>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br><br>

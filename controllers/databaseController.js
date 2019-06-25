@@ -121,6 +121,22 @@ async function database(app) {
         })
     }
 
+    //get posts
+    async function getPosts() {
+        return await Post.find((err, res) => {
+            //console.log(res);
+            if (err) console.log(err);
+            return res;
+        })
+    }
+
+    //get username
+    async function getUserName(userId) {
+        return await User.findById(userId, (err, res) => {
+            if (res) return res.username;
+        })
+    }
+
 
 
 
@@ -128,6 +144,8 @@ async function database(app) {
     //exports
 
     module.exports.savePost = savePost;
+    module.exports.getPosts = getPosts;
+    module, exports.getUserName = getUserName;
 
 }
 module.exports.db = database;
