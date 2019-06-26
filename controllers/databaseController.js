@@ -1,4 +1,12 @@
 async function database(app) {
+    var sqlite = require('sqlite');
+
+    const dbp = sqlite.open('./wrg.db', { Promise });
+    const db = await dbp;
+    console.log('db open')
+
+    console.log(await db.get('select * from users'))
+
 
 
     var mongoose = require('mongoose');

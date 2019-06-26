@@ -1,9 +1,8 @@
-module.exports = async(app) => {
+module.exports = async(app, db1) => {
 
     var moment = require('moment');
 
-    var db = require('./databaseController');
-    db.db(app);
+    var db = db1;
 
     var Papa = require('papaparse');
     var fs = require('fs');

@@ -18,7 +18,7 @@ app.set('view engine', 'ejs');
 
 start()
 
-function start() {
+async function start() {
 
     let port = process.env.PORT;
     if (port == null || port == "") {
@@ -27,6 +27,8 @@ function start() {
     app.listen(port);
     console.log("listening on port " + port);
 
-    var pc = require('./controllers/postController')(app);
-    var gc = require('./controllers/getController')(app);
+    var db = require('./controllers/databaseController');
+    db.db(app);
+    var pc = require('./controllers/postController')(app, db);
+    var gc = require('./controllers/getController')(app, db);
 }
