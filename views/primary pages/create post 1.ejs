@@ -36,11 +36,27 @@
                     <div class="row">
                         <div class="col col-md-12">
                             <select id="sub-category" class="form-control category" name="">
-                            <% for(var i =0; i < array[first].length; i++) { %>
-                                <option value="<%-array[first][i]%>"><%-array[first][i]%></option>
-                            <%}%>
-                            </select>
+                                <% for(var i =0; i < array[first].length; i++) { %>
+                                    <option value="<%-array[first][i]%>"><%-array[first][i]%></option>
+                                <%}%>
+                                </select>
                             <small class="form-text text-muted">Sub-Category</small>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-md-12">
+                            <select id="make" class="form-control category" name="">
+                                
+                                </select>
+                            <small class="form-text text-muted">Car Make</small>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-md-12">
+                            <select id="model" class="form-control category" name="">
+                                   
+                                    </select>
+                            <small class="form-text text-muted">Car Model</small>
                         </div>
                     </div>
                     <div class="row">
@@ -72,6 +88,13 @@
             var first = <%- JSON.stringify(first) %>;
             var second = <%- JSON.stringify(second) %>;
             $('#sub-category').val(arr[first][second]).trigger('change');
+
+            var carArray = <%- JSON.stringify(carArray) %>;
+            for (let index = 0; index < carArray.length; index++) {
+                const element = carArray[index][0];
+                $(' <option value="' + element + '">' + element + '</option>').appendTo($('#make'));
+
+            }
         });
 
 

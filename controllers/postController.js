@@ -1,10 +1,8 @@
-module.exports = async(app) => {
+module.exports = async(app, db) => {
 
 
     var passport = require('passport')
-    var db = require('./databaseController');
 
-    db.db(app);
 
 
 

@@ -1,9 +1,8 @@
-module.exports = async(app) => {
+module.exports = async(app, db) => {
 
     var moment = require('moment');
 
-    var db = require('./databaseController');
-    db.db(app);
+
 
     var Papa = require('papaparse');
     var fs = require('fs');
@@ -110,17 +109,37 @@ module.exports = async(app) => {
     }
 
 
-    app.get('/create-post', (req, res) => {
+    app.get('/create-post', async(req, res) => {
         if (req.isAuthenticated) {
             var origin = req.query;
             console.log(app.parts[origin.main]);
             var val = req.user.username
-                //getCarList();
-            res.render('primary pages/create post 1', { name: val, array: app.parts, first: origin.main, second: origin.second });
+            var arr = await readMakeandModelFile();
+            res.render('primary pages/create post 1', { name: val, array: app.parts, first: origin.main, second: origin.second, carArray: arr });
         } else {
             res.redirect('/login').end('please login');
         }
     })
+
+    async function readMakeandModelFile() {
+        var fs = require('fs');
+        var es = require('event-stream');
+        var line = 0;
+        var tempArray = [];
+
+
+        return new Promise((resolve, reject) => {
+            const cqsv = fs.readFileSync('array.txt', 'utf8');
+            Papa.parse(cqsv, {
+                dynamicTyping: true,
+                complete: function(results) {
+                    resolve(results.data);
+                }
+            });
+        })
+
+
+    }
 
     async function getCarList() {
         var request = require('request');
@@ -186,6 +205,7 @@ module.exports = async(app) => {
             })
 
             var file = fs.createWriteStream('array.txt');
+            var es = require('event-stream')
             file.on('error', function(err) { /* error handling */ });
             arr1.forEach(function(v) { file.write(v.join(', ') + '\n'); });
             file.end();
