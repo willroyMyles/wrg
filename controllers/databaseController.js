@@ -15,6 +15,10 @@ async function database(app) {
         secret: 'someRandomString',
         resave: false,
         saveUninitialized: false,
+        cookie: {
+            httpOnly: false,
+
+        },
         store: new mongoStore({ mongooseConnection: mongoose.connection }),
         //cookie: { secure: true }
     }));
