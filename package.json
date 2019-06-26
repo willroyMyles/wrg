@@ -16,12 +16,15 @@
         "moment": "^2.24.0",
         "mongoose": "^5.5.13",
         "mysql": "^2.17.1",
+        "mysql2": "^1.6.5",
         "nodemon": "^1.19.1",
+        "orm": "^5.0.4",
         "papaparse": "^5.0.0",
         "passport": "^0.4.0",
         "passport-google-oauth": "^2.0.0",
         "passport-local": "^1.0.0",
         "request": "^2.88.0",
+        "sequelize": "^5.8.12",
         "socket.io": "^2.2.0",
         "sqlite": "^3.0.3",
         "trumbowyg": "^2.18.0"
@@ -31,6 +34,8 @@
         "node-sass": "^4.12.0"
     },
     "scripts": {
+        "start": "run index.js",
+        "logs": "heroku logs --tail -a wrg-auto",
         "test": "echo \"Error: no test specified\" && exit 1",
         "sass:compile": "node-sass --include-path sass public/css/breadcrumb.scss public/css/breadcrumb.css"
     },

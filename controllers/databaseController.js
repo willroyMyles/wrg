@@ -1,11 +1,36 @@
 async function database(app) {
     var sqlite = require('sqlite');
 
-    const dbp = sqlite.open('./wrg.db', { Promise });
+    const dbp = sqlite.open('./wrg.sqlite', { Promise });
     const db = await dbp;
-    console.log('db open')
+    // console.log('db open')
+    // console.log(await db.get('select * from users'))
+    // const Sequelize = require('sequelize');
 
-    console.log(await db.get('select * from users'))
+    // const sequelize = new Sequelize({
+    //     dialect: 'sqlite',
+    //     storage: './wrg.sqlite'
+    // });
+
+    // sequelize
+    //     .authenticate()
+    //     .then((res) => {
+    //         console.log(res)
+    //         console.log('Connection has been established successfully.');
+    //     })
+    //     .catch(err => {
+    //         console.error('Unable to connect to the database:', err);
+    //     });
+
+
+
+    var CU = require('../modules/user').User;
+    var someuser = new CU({
+        userId: 8,
+        username: 'something',
+        password: 'someone',
+        email: ''
+    }).create();
 
 
 
