@@ -1,119 +1,71 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html,
-body {
-    height: 100%;
-    background-color: #333;
-}
-
-.container {
+.gutter {
     display: flex;
-    flex-direction: column;
-    height: 100%;
-    width: 100%;
-    min-width: 480px;
-    padding: 0 40px;
-}
-
-.breadcrumb {
-    display: flex;
-    border-radius: 6px;
     overflow: hidden;
+    border-top: 1px solid rgba(75, 75, 75, 0.103);
     margin: auto;
     text-align: center;
-    top: 50%;
-    width: 100%;
-    height: 57px;
-    transform: translateY(-50%);
-    box-shadow: 0 1px 1px black, 0 4px 14px rgba(0, 0, 0, 0.7);
+    transform: translateY(-20%);
     z-index: 1;
-    background-color: #ddd;
     font-size: 14px;
+    color: rgba(90, 90, 90, 0.11);
+    background-color: white;
+    display: flex;
+    width: 100%;
+    padding: 5px;
 }
 
-.breadcrumb select {
+.gutter small {
     position: relative;
     display: flex;
     flex-grow: 1;
     text-decoration: none;
     margin: auto;
-    height: 100%;
-    padding-left: 38px;
-    padding-right: 0;
-    color: #666;
+    color: rgba(75, 75, 75, 0.527);
 }
 
-.breadcrumb select:first-child {
+.gutter small:first-child {
     padding-left: 15.2px;
 }
 
-.breadcrumb select:last-child {
+.gutter small:last-child {
     padding-right: 15.2px;
 }
 
-.breadcrumb select:after {
-    content: "";
-    position: absolute;
-    display: inline-block;
-    width: 57px;
-    height: 57px;
-    top: 0;
-    right: -28.14815px;
-    background-color: #ddd;
-    border-top-right-radius: 5px;
-    transform: scale(0.707) rotate(45deg);
-    box-shadow: 1px -1px rgba(0, 0, 0, 0.25);
-    z-index: 1;
-}
-
-.breadcrumb select:last-child:after {
+.gutter small:last-child:after {
     content: none;
 }
 
-.breadcrumb__inner {
+.gutter__inner {
     display: flex;
     flex-direction: column;
     margin: auto;
     z-index: 2;
 }
 
-.breadcrumb__title {
+.gutter__title {
     font-weight: bold;
-}
-
-.breadcrumb select.active,
-.breadcrumb select:hover {
-    background: #996300;
-    color: white;
-}
-
-.breadcrumb select.active:after,
-.breadcrumb select:hover:after {
-    background: #996300;
-    color: white;
+    font-size: 10px;
+    text-align: center;
+    color: rgba(75, 75, 75, 0.219);
 }
 
 @media all and (max-width: 1000px) {
-    .breadcrumb {
+    .gutter {
         font-size: 12px;
     }
 }
 
 @media all and (max-width: 710px) {
-    .breadcrumb__desc {
+    .gutter__desc {
         display: none;
     }
-    .breadcrumb {
+    .gutter {
         height: 38px;
     }
-    .breadcrumb select {
+    .gutter select {
         padding-left: 25.33333px;
     }
-    .breadcrumb select:after {
+    .gutter select:after {
         content: "";
         width: 38px;
         height: 38px;

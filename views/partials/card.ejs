@@ -1,14 +1,10 @@
 <div class="container personal-card">
     <div class="row">
-        <div class="col col-md-3 img-circle img-thumbnail">
-            <img src="image/logo.png" alt="suspension">
-        </div>
-        <div class="col col-md-9">
+        <div class="col col-md-8">
             <div class=" row title text-capitalize">
                 <div class="col col-md-10">
                     <a href="">
-                        <%-info.title%><i class="fa fa-arrow-alt-circle-right"></i>
-
+                        <%-info.title%> <i class="fa fa-arrow-alt-circle-right"> </i>
                     </a>
 
                 </div>
@@ -34,6 +30,19 @@
                 </div>
             </div>
         </div>
+
+    </div>
+
+</div>
+
+<div class="row justify-content-center gutter">
+
+    <div class="col col-md-12 justify-content-center flex-grow-1 gutter">
+        <small class=" justify-content-center flex-fill"><span class="gutter__title"><a href="<%- info.category%>" class="text-center"><%- info.category%></a></span></small>
+        <small class=" justify-content-center"><span class="gutter__title justify-content-center">model</span></small>
+        <small class=" justify-content-center"><span class="gutter__title justify-content-center">make</span></small>
+        <small class="justify-content-center"><span class="gutter__title justify-content-center">year</span></small>
     </div>
 </div>
-<br><br>
+
+<br>

@@ -60,14 +60,13 @@ module.exports = async(app) => {
             }
 
             var posts = await formatPostsToCard(await db.getPosts());
-            console.log(posts);
             res.render('primary pages/primary template', { title: app.parts[index.first][0], links: opts, highlighted: { first: index.first, second: index.second }, name: req.user == undefined ? false : req.user.username, cardInfo: posts });
         })
     })
 
     async function formatPostsToCard(posts) {
         var cardInfo = [];
-        console.log(moment(Date(), "hh:mm"));
+        //console.log(moment(Date(), "hh:mm"));
 
         for (let index = 0; index < posts.length; index++) {
             const element = posts[index];
@@ -76,7 +75,7 @@ module.exports = async(app) => {
             var newbod = String(element.body).split('>')[1] + "...";
             cardData.title = element.title;
             cardData.body = newbod;
-            cardData.category = app.parts[element.category][element.subcategory];
+            cardData.category = app.parts[element.category][element.sub_category];
             cardData.username = (await db.getUserName(element.userId)).username;
             cardData.time = element.time; //moment(element.time).format("LLLL  LT")
             cardInfo.push(cardData);
@@ -116,11 +115,96 @@ module.exports = async(app) => {
             var origin = req.query;
             console.log(app.parts[origin.main]);
             var val = req.user.username
-            res.render('primary pages/create post', { name: val, array: app.parts, first: origin.main, second: origin.second });
+                //getCarList();
+            res.render('primary pages/create post 1', { name: val, array: app.parts, first: origin.main, second: origin.second });
         } else {
             res.redirect('/login').end('please login');
         }
     })
 
+    async function getCarList() {
+        var request = require('request');
+        var cheerio = require('cheerio');
+        var fs = require('fs');
+        request('https://www.jacars.net/vehicles/cars/', async(err, res, body) => {
+            var $ = cheerio.load(body);
+            var select = $('select[name=mark] option');
+            var arr = [];
+            var i = 0;
+            var arr1 = [];
 
+            Array.from(select).forEach((val, index) => {
+                if ($(val).text() != '')
+                    arr.push($(val).text());
+            })
+            console.log(arr.length)
+
+
+            debugger;
+            await asyncForEach(arr, async(val, index) => {
+                console.log(val)
+                var link = val + '/';
+                link = link.replace(/ /g, '-');
+                link = link.toLowerCase();
+                // await request(`https://www.jacars.net/vehicles/cars/` + link, (err, res, body) => {
+
+                // })
+                await new Promise(function(resolve, reject) {
+                    if (link == 'hino-coaster/') link = 'hino';
+                    if (link == 'hummer/') link = 'hammer';
+                    if (link == 'mercedes-benz/') link = 'mercedes';
+                    if (link == 'opel,-vauxhall/') link = 'opel-and-vauxhall';
+                    if (link == 'tsx/') link = 'acura';
+
+                    request(`https://www.jacars.net/vehicles/cars/` + link, async function(error, res, body) {
+                        //console.log(`https://www.jacars.net/vehicles/cars/` + link)
+                        var $ = cheerio.load(body);
+                        var select1 = $('select[name=model] option');
+                        var temp = [];
+                        temp.push(arr[i]);
+                        if (error) console.log(error)
+
+                        Array.from(select1).forEach((val, index) => {
+                            if ($(val).text() != '')
+                                temp.push($(val).text())
+                                //console.log($(val).text())
+                            resolve();
+                        })
+                        arr1.push(temp);
+                        temp = [];
+                        i++;
+                    });
+                    console.log(`${index == arr.length}, ${index}, ${arr.length}`)
+                    if (index == arr.length) resolve();
+                });
+
+            })
+            console.log(arr1)
+            fs.writeFile('text.csv', arr1, (err) => {
+                if (!err) console.log('data written');
+                else console.log(err);
+            })
+
+            var file = fs.createWriteStream('array.txt');
+            file.on('error', function(err) { /* error handling */ });
+            arr1.forEach(function(v) { file.write(v.join(', ') + '\n'); });
+            file.end();
+
+        });
+    }
+
+    async function retuenArray(arr, arr1) {
+        return new Promise((resolve, reject) => {
+            Array.from(arr).forEach((val, index) => {
+                Array.from(arr1).push($(val).text());
+            })
+            resolve
+        })
+    }
+
+    async function asyncForEach(array, callback) {
+        for (let index = 0; index < array.length; index++) {
+            await callback(array[index], index, array);
+        }
+    }
 }

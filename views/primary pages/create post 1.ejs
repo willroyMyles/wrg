@@ -14,43 +14,43 @@
     <form method="post" action="/create/post">
         <div class="container post-box">
             <div class="row ">
-                <div class="col col-md-12">
+                <div class="col col-md-9">
+                    <div class="row my-2">
+                        <div class="col  col-md-12">
+                            <input class="form-control" type="text" name="" id="title" placeholder="Title goes here...">
+                            <div id="editor" class="" placeholder="Type here ... "></div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="row my-2">
-                <div class="col  col-md-12">
-                    <input class="form-control" type="text" name="" id="title" placeholder="Title goes here...">
-
-                    <div id="editor" class="" placeholder="Type here ... "></div>
-                </div>
-            </div>
-
-            <div class="row my-n4">
-                <div class="col col-md-4 ">
-                    <select name="Category" id="category" class=" justify-content-center form-control category">
-                                            <% for(var i =0; i < array.length; i++) { %>
-
-                                                <option value="<%-array[i][0]%>"><%-array[i][0]%></option>
-
-                                                <%}%>
-                                          </select>
-                </div>
-
-                <div class="col col-md-4">
-                    <select id="sub-category" class="form-control category" name="">
-                        <% for(var i =0; i < array[first].length; i++) { %>
-                            <option value="<%-array[first][i]%>"><%-array[first][i]%></option>
-
+                <div class="col col-md-3">
+                    <div class="row my-2">
+                        <div class="col col-md-12 ">
+                            <select name="Category" id="category" class=" justify-content-center form-control category">
+                            <% for(var i =0; i < array.length; i++) { %>
+                                <option value="<%-array[i][0]%>"><%-array[i][0]%></option>
                             <%}%>
-                                                        </select>
-                </div>
-
-
-
-                <div class="col col-md-3 offset-1">
-                    <a name="btn" id="btn" class="btn btn-secondary btn-block" href="" role="button"><i class="fa fa-plus" aria-hidden="true"></i> Post</a>
+                            </select>
+                            <small class="form-text text-muted">Category</small>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-md-12">
+                            <select id="sub-category" class="form-control category" name="">
+                            <% for(var i =0; i < array[first].length; i++) { %>
+                                <option value="<%-array[first][i]%>"><%-array[first][i]%></option>
+                            <%}%>
+                            </select>
+                            <small class="form-text text-muted">Sub-Category</small>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-md-12">
+                            <a name="btn" id="btn" class="btn btn-secondary btn-block" href="" role="button"><i class="fa fa-plus" aria-hidden="true"></i> Post</a>
+                        </div>
+                    </div>
                 </div>
             </div>
+
             <div class="row">
                 <div class="col col-md-4 my-4">
                     <div class="form-check form-check-inline">
@@ -72,12 +72,6 @@
             var first = <%- JSON.stringify(first) %>;
             var second = <%- JSON.stringify(second) %>;
             $('#sub-category').val(arr[first][second]).trigger('change');
-
-            //Create a variable for the CarQuery object.  You can call it whatever you like.
-            var carquery = new CarQuery();
-
-            //Run the carquery init function to get things started:
-            carquery.initYearMakeModelTrim('car-years', 'car-makes', 'car-models', 'car-model-trims');
         });
 
 
