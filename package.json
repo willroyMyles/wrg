@@ -34,7 +34,7 @@
         "node-sass": "^4.12.0"
     },
     "scripts": {
-        "start": "run index.js",
+        "start": "node index.js",
         "logs": "heroku logs --tail -a wrg-auto",
         "test": "echo \"Error: no test specified\" && exit 1",
         "sass:compile": "node-sass --include-path sass public/css/breadcrumb.scss public/css/breadcrumb.css"
