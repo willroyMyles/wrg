@@ -93,6 +93,7 @@
         var arr = <%- JSON.stringify(array) %>;
         var first = <%- JSON.stringify(first) %>;
         var second = <%- JSON.stringify(second) %>;
+        $('#category').val(arr[first][0]).trigger('change');
         $('#sub-category').val(arr[first][second]).trigger('change');
 
         var carArray = <%- JSON.stringify(carArray) %>;

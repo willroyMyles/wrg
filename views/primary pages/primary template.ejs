@@ -17,14 +17,16 @@
 
 
                                 <li class="list-inline-item current cat-links my-2">
-                                    <a href="">
-                                        <%- links[index] %>
+                                    <a href="<%- links[index] %>">
+                                        <% if(index == 0) links[index] = 'Everything' %>
+                                            <%- links[index] %>
                                     </a>
                                 </li>
                                 <% }else {%>
                                     <li class="list-inline-item cat-links my-2">
-                                        <a href="">
-                                            <%- links[index] %>
+                                        <a href="<%- links[index] %>">
+                                            <% if(index == 0) links[index] = 'Everything' %>
+                                                <%- links[index] %>
                                         </a>
                                     </li>
                                     <%}%>
@@ -39,32 +41,35 @@
             </div>
         </div>
 
-        <div class="container">
-            <div class="row">
-                <div class="col col-md-8">
-                    <% console.log(cardInfo) %>
-                        <% for(let i=0; i < cardInfo.length; i++){ %>
-                            <%- include('../partials/card', {info : cardInfo[i]}) %>
-                                <%}%>
-                </div>
-            </div>
-        </div>
+
+
 
         <div class="container my-4 h-100">
-            <% if (true) { %>
-                <header class="masthead">
-                    <div class="container h-100">
-                        <div class="row h-100 align-items-center">
-                            <div class="col-12 text-center">
-                                <h1 class="font-weight-light">Oh my, this is embrassing</h1>
-                                <p class="lead">No posts as of yet</p>
+            <% console.log(cardInfo.length + "card info") %>
+                <% if(cardInfo == null || cardInfo.length == 0 || cardInfo == new Array) { %>
+                    <% console.log('hello wolrd') %>
+
+                        <header class="masthead">
+                            <div class="container h-100">
+                                <div class="row h-100 align-items-center">
+                                    <div class="col-12 text-center">
+                                        <h1 class="font-weight-light">Oh my, this is embrassing</h1>
+                                        <p class="lead">No posts as of yet</p>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                </header>
+                        </header>
 
-                <% } else{%>
+                        <% } else{%>
 
-
-                    <%}%>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col col-md-8">
+                                        <% for(let i=0; i < cardInfo.length; i++){ %>
+                                            <%- include('../partials/card', {info : cardInfo[i]}) %>
+                                                <%}%>
+                                    </div>
+                                </div>
+                            </div>
+                            <%}%>
         </div>

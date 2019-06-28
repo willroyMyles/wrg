@@ -22,7 +22,6 @@ module.exports = async(app, db) => {
     // });
 
     app.post('/create/post', async(req, res, error) => {
-        console.log(req.body);
         var post = {
             _id: null,
             userId: req.user._id,
