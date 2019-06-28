@@ -7,6 +7,9 @@ module.exports = mongoose.model('posts', {
     body: String,
     category: Number,
     sub_category: Number,
+    make: String,
+    model: String,
+    year: Number,
     time: { type: Date, default: Date.now },
 
     replies: []

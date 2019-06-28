@@ -118,17 +118,25 @@ async function database(app) {
 
     //save post
     async function savePost(post) {
-        var Id = await Post.collection.estimatedDocumentCount() + 1;
+        var Id;
+        await Post.find((err, res) => {
+            Id = res[0]._id + 1;
+        }).limit(1).sort({ time: -1 });
         post._id = Id;
+        console.log('save post called');
         Post(post).save((err) => {
-            if (err) return error;
+            if (err) console.log(err);
         })
     }
 
     //get posts
-    async function getPosts() {
-        return await Post.find((err, res) => {
-            //console.log(res);
+    async function getPosts(index) {
+        if (index.second == 0)
+            return await Post.find({ category: index.first }, (err, res) => {
+                if (err) console.log(err);
+                return res;
+            })
+        else return await Post.find({ category: index.first, sub_category: index.second }, (err, res) => {
             if (err) console.log(err);
             return res;
         })

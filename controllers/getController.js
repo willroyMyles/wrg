@@ -58,7 +58,7 @@ module.exports = async(app, db) => {
                 opts.push(element);
             }
 
-            var posts = await formatPostsToCard(await db.getPosts());
+            var posts = await formatPostsToCard(await db.getPosts(index));
             res.render('primary pages/primary template', { title: app.parts[index.first][0], links: opts, highlighted: { first: index.first, second: index.second }, name: req.user == undefined ? false : req.user.username, cardInfo: posts });
         })
     })
@@ -77,6 +77,9 @@ module.exports = async(app, db) => {
             cardData.category = app.parts[element.category][element.sub_category];
             cardData.username = (await db.getUserName(element.userId)).username;
             cardData.time = element.time; //moment(element.time).format("LLLL  LT")
+            cardData.make = element.make;
+            cardData.model = element.model;
+            cardData.year = element.year;
             cardInfo.push(cardData);
 
         }

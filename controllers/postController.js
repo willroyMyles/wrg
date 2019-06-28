@@ -30,6 +30,9 @@ module.exports = async(app, db) => {
             body: req.body.body,
             category: req.body.category_index,
             sub_category: req.body.sub_category_index,
+            make: req.body.make,
+            model: req.body.model,
+            year: req.body.year,
             replies: []
         }
 
