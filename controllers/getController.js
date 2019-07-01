@@ -17,9 +17,9 @@ module.exports = async(app, db) => {
     app.parts = partsArr;
 
     app.get('/', (req, res) => {
-        console.log(req.user);
-        console.log(req.isAuthenticated());
-        res.render('body', { data: app.parts, login: false, name: req.user == undefined ? false : req.user.username });
+        if (req.isAuthenticated()) login = 1;
+        else login = 0;
+        res.render('body', { data: app.parts, login: login, name: req.user == undefined ? false : req.user.username });
     });
 
     app.get('/login', (req, res) => {
