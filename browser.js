@@ -1,0 +1,1 @@
+ bs = require('bootstrap-select');

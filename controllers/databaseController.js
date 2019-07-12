@@ -5,6 +5,7 @@ async function database(app) {
     mongoose.connect('mongodb+srv://user:cq8raK4jHEo2JngM@wrg-y3jqo.mongodb.net/test?retryWrites=true&w=majority', { useNewUrlParser: true })
     var User = require('../models/user');
     var Post = require('../models/posts')
+    var Replies = require('../models/replies')
 
     var session = require('express-session');
     var passport = require('passport');
@@ -43,7 +44,6 @@ async function database(app) {
 
 
     passport.serializeUser(function(userId, done) {
-        console.log(userId);
         done(null, userId);
     });
 
@@ -56,8 +56,6 @@ async function database(app) {
 
     passport.use(new LocalStrategy(
         function(username, password, done) {
-            console.log(username);
-            console.log(password);
             User.findOne({ username: username, password: password }, (err, res) => {
                 if (err) { return done(err); }
                 if (!res) { return done(null, false); }
@@ -70,7 +68,6 @@ async function database(app) {
     passport.use('local-signup', new LocalStrategy(
         (username, password, done) => {
             console.log('using passport strtegy')
-
             User.findOne({ username: username }, async(err, res) => {
                 console.log(err);
                 if (err) return done(err);
@@ -128,6 +125,29 @@ async function database(app) {
             if (err) console.log(err);
         })
     }
+    //save reply
+    async function saveReply(reply) {
+        var id = 0;
+        await Replies.find((err, res) => {
+            if (Array.from(res).length != 0) id = res[0]._id + 1;
+            else id = 0;
+        }).limit(1).sort({ time: -1 });
+
+        reply._id = id;
+
+        Replies(reply).save((err) => {
+            if (err) console.log(err);
+        })
+    }
+
+
+    //get replies
+    async function getReplies(postIds) {
+        return await Replies.find({ postId: postIds }, (err, res) => {
+            if (err) console.log(err)
+            return res;
+        })
+    }
 
     //get posts
     async function getPosts(index) {
@@ -138,6 +158,14 @@ async function database(app) {
             })
         else return await Post.find({ category: index.first, sub_category: index.second }, (err, res) => {
             if (err) console.log(err);
+            return res;
+        })
+    }
+
+    //get post
+    async function getPost(postId) {
+        return await Post.findOne({ _id: postId }, (err, res) => {
+            if (err) console.log(err)
             return res;
         })
     }
@@ -156,7 +184,10 @@ async function database(app) {
     //exports
 
     module.exports.savePost = savePost;
+    module.exports.saveReply = saveReply;
     module.exports.getPosts = getPosts;
+    module.exports.getPost = getPost;
+    module.exports.getReplies = getReplies;
     module, exports.getUserName = getUserName;
 
 }

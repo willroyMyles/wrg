@@ -63,6 +63,35 @@ module.exports = async(app, db) => {
         })
     })
 
+    app.get('/create-post', async(req, res) => {
+        if (req.isAuthenticated) {
+            var origin = req.query;
+            console.log(app.parts[origin.main]);
+            var val = req.user.username
+            var arr = await readMakeandModelFile();
+            res.render('primary pages/create post 1', { name: val, array: app.parts, first: origin.main, second: origin.second, carArray: arr });
+        } else {
+            res.redirect('/login').end('please login');
+        }
+    })
+
+    app.get('/posts/:id', async(req, res) => {
+        if (req.isAuthenticated) {
+            var post = await db.getPost(req.params.id);
+            var un = await db.getUserName(post.userId)
+            post.poster = un.username;
+            res.render('primary pages/post', { id: req.params.id, name: req.user.username, postInfo: post })
+        } else {
+            res.redirect('/login').end('please login');
+        }
+    })
+
+    async function returnPost(id) {
+
+
+
+    }
+
     async function formatPostsToCard(posts) {
         var cardInfo = [];
         //console.log(moment(Date(), "hh:mm"));
@@ -80,6 +109,7 @@ module.exports = async(app, db) => {
             cardData.make = element.make;
             cardData.model = element.model;
             cardData.year = element.year;
+            cardData.id = element._id;
             cardInfo.push(cardData);
 
         }
@@ -110,19 +140,6 @@ module.exports = async(app, db) => {
         return { first, second };
 
     }
-
-
-    app.get('/create-post', async(req, res) => {
-        if (req.isAuthenticated) {
-            var origin = req.query;
-            console.log(app.parts[origin.main]);
-            var val = req.user.username
-            var arr = await readMakeandModelFile();
-            res.render('primary pages/create post 1', { name: val, array: app.parts, first: origin.main, second: origin.second, carArray: arr });
-        } else {
-            res.redirect('/login').end('please login');
-        }
-    })
 
     async function readMakeandModelFile() {
         var fs = require('fs');

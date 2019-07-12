@@ -1,0 +1,84 @@
+<div class="container">
+    <div class="row my-2">
+        <div class="col col-md-2">
+            <span id="comment-count" class="text-muted">number of comments</span>
+        </div>
+        <div class="col col-md-3 text-muted" id="first">
+            <!-- <span>something else maybe</span> -->
+        </div>
+        <div class="col col-md-7 text-right">
+            <span class="right">...</span>
+        </div>
+    </div>
+</div>
+<div class="container personal-comment" id="comments">
+
+</div>
+
+
+<script>
+    $(document).ready((e) => {
+
+        getReplies();
+
+
+        $("#post-reply").on('click', (e) => {
+            saveReply()
+        })
+
+    })
+
+    function saveReply() {
+        var item = {
+            body: $('textarea').val()
+        }
+        console.log('button clciked')
+
+        $.ajax({
+            method: 'put',
+            url: window.location.pathname,
+            data: item,
+            success: function(data, text) {
+                if (data.count == 0) {
+                    //$('#first').append('Be the first to reply!')
+                }
+
+                $("#comment-count").text(data.count + " replies")
+            },
+            error: function(request, status, error) {
+                //error handling here.
+                console.log(error);
+                console.log("error");
+            }
+        });
+    }
+
+    function getReplies() {
+        $.ajax({
+            method: 'put',
+            url: window.location.pathname,
+            success: function(data, text) {
+                if (data.count == 0) {
+                    //$('#first').append('Be the first to reply!')
+                }
+
+                $("#comment-count").text(data.count + " replies")
+
+                for (let index = 0; index < Array.from(data.replies).length; index++) {
+                    const element = Array.from(data.replies)[index];
+                    console.log(element)
+                    var item = '<div class="row"><div class="col-md-12"><div>posted by <a href="poster">poster</a><a href=""></a></div><div>body</div></div></div>';
+                    item = item.replace(/poster/g, <%= postInfo.userId %>);
+                    //var div = '<div class="row "> <div class = "col-md-12" ><div > posted by <a href = "" > hey </a> </div> <div > post </div> </div> </div>';
+                    $('#comments').append(item)
+
+                }
+            },
+            error: function(request, status, error) {
+                //error handling here.
+                console.log(error);
+                console.log("error");
+            }
+        });
+    }
+</script>

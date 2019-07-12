@@ -11,30 +11,17 @@
                 <a href="/" class="nav-link1" alt="Forum">Forum</a>
 
                 <% if(name != false){%>
-                    <!-- <div class="btn-group" role="group" aria-label="Button group">
-
-                        <a href="" class="nav-link1" id="user" alt="<%= name %>">
-                            <%= name %>
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="my-dropdown">
-                            <a class="dropdown-item active" href="#">Text</a>
-                        </div>
-                    </div> -->
-
                     <div class="btn-group">
                         <a href="#" alt="<%= name %>" class="nav-link1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <%= name %>
                         </a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
+                            <a class="dropdown-item" href="#"><i class="fa fa-user-shield    "></i>&nbsp;&nbsp;&nbsp;Profile</a>
+                            <a class="dropdown-item" href="#"><i class="fa fa-cog" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp;Settings</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" id="logout" href="#">log out</a>
+                            <a class="dropdown-item" id="logout" href="#"><i class="fas fa-sign-out-alt    "></i>&nbsp;&nbsp;&nbsp; Log Out</a>
                         </div>
                     </div>
-                    <a href=""><i class="fa fa-cog" aria-hidden="true"></i></a>
-
                     <form name='myForm' action="/logout" method='post'>
                         <input type="hidden" name="thisIsTheParameterName" value="logout" />
                     </form>

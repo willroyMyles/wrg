@@ -14,7 +14,7 @@
     <form method="post" action="/create/post">
         <div class="container post-box">
             <div class="row ">
-                <div class="col col-md-9">
+                <div class="col col-md-8">
                     <div class="row my-2">
                         <div class="col  col-md-12">
                             <input class="form-control" type="text" name="" id="title" placeholder="Title goes here...">
@@ -22,7 +22,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col col-md-3">
+                <div class="col col-md-3 ">
                     <div class="row my-2">
                         <div class="col col-md-12 ">
                             <select name="Category" id="category" class=" justify-content-center form-control category">
@@ -127,7 +127,6 @@
 
 
         $('#editor').trumbowyg();
-        console.log('<%-first%>');
 
         $('#category').change((e) => {
             console.log($("#category option:selected").index())
