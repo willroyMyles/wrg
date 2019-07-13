@@ -143,9 +143,16 @@ async function database(app) {
 
     //get replies
     async function getReplies(postIds) {
-        return await Replies.find({ postId: postIds }, (err, res) => {
-            if (err) console.log(err)
-            return res;
+        return new Promise((resolve, reject) => {
+            Replies.find({ postId: postIds }, async(err, res) => {
+                if (err) console.log(err)
+                var names = [];
+                for (let index = 0; index < Array.from(res).length; index++) {
+                    var user = await getUserName(Array.from(res)[index].userId);
+                    names[index] = user.username;
+                }
+                resolve({ res, names });
+            })
         })
     }
 

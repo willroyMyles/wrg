@@ -4,11 +4,13 @@
     "description": "",
     "main": "index.js",
     "dependencies": {
+        "@types/dateformat": "^3.0.0",
         "body-parser": "^1.19.0",
         "bootstrap": "^4.3.1",
         "bootstrap-select": "^1.13.10",
         "cheerio": "^1.0.0-rc.3",
         "connect-mongo": "^3.0.0",
+        "dateformat": "^3.0.3",
         "ejs": "^2.6.1",
         "event-stream": "^4.0.1",
         "express": "^4.17.1",
@@ -25,6 +27,7 @@
         "passport-local": "^1.0.0",
         "request": "^2.88.0",
         "socket.io": "^2.2.0",
+        "time-ago": "^0.2.1",
         "trumbowyg": "^2.18.0"
     },
     "devDependencies": {

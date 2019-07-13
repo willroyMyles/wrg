@@ -1,1 +1,1 @@
- bs = require('bootstrap-select');
+ df = require('dateformat');

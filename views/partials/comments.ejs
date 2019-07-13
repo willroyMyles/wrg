@@ -15,6 +15,7 @@
 
 </div>
 
+<script src="/js/bundle.js"></script>
 
 <script>
     $(document).ready((e) => {
@@ -53,23 +54,31 @@
         });
     }
 
+    var dateformat = require('dateformat');
+    var ta = require('time-ago');
+
+
     function getReplies() {
         $.ajax({
             method: 'put',
             url: window.location.pathname,
             success: function(data, text) {
+                console.log(data)
                 if (data.count == 0) {
                     //$('#first').append('Be the first to reply!')
                 }
 
                 $("#comment-count").text(data.count + " replies")
-
-                for (let index = 0; index < Array.from(data.replies).length; index++) {
-                    const element = Array.from(data.replies)[index];
+                for (let index = 0; index < Array.from(data.replies.res).length; index++) {
+                    const element = Array.from(data.replies.res)[index];
                     console.log(element)
-                    var item = '<div class="row"><div class="col-md-12"><div>posted by <a href="poster">poster</a><a href=""></a></div><div>body</div></div></div>';
-                    item = item.replace(/poster/g, <%= postInfo.userId %>);
-                    //var div = '<div class="row "> <div class = "col-md-12" ><div > posted by <a href = "" > hey </a> </div> <div > post </div> </div> </div>';
+                    var time = new Date(data.replies.res[index].time);
+                    let time2 = dateformat(time, "ddd mmm d yyyy  |  hh:mm tt  •  ")
+                    var item = '<div class="row"><div class="col-md-12"><div><small class="text-muted">posted by <a href="/profile/poster">poster</a><a href=""></a></small></div><div class="my-1">body</div><div class="my-1"><small class="text-muted">time</small></div></div></div>';
+                    item = item.replace(/poster/g, data.replies.names[index]);
+                    item = item.replace(/body/g, data.replies.res[index].body)
+                    item = item.replace(/time/g, time2 + ta.ago(time))
+                        //var div = '<div class="row "> <div class = "col-md-12" ><div > posted by <a href = "" > hey </a> </div> <div > post </div> </div> </div>';
                     $('#comments').append(item)
 
                 }

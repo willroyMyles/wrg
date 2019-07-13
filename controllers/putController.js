@@ -15,8 +15,9 @@ module.exports = async(app, db) => {
 
 
         var replies = await db.getReplies(req.params.id);
-        if (replies) {
-            count = Array.from(replies).length
+        console.log(replies);
+        if (replies.res) {
+            count = Array.from(replies.res).length
         } else count = 0;
         res.send({ replies: replies, count: count })
     })
