@@ -2,7 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var expressLayouts = require('express-ejs-layouts');
 var moment = require('moment');
-var bs = require('bootstrap-select');
+
 
 var app = express();
 app.use(express.static('./public/'));
