@@ -128,10 +128,13 @@ async function database(app) {
     //save reply
     async function saveReply(reply) {
         var id = 0;
-        await Replies.find((err, res) => {
-            if (Array.from(res).length != 0) id = res[0]._id + 1;
-            else id = 0;
-        }).limit(1).sort({ time: -1 });
+        await new Promise((resolve, reject) => {
+            Replies.find((err, res) => {
+                if (Array.from(res).length != 0) id = res[0]._id + 1;
+                else id = 0;
+                resolve(id);
+            }).limit(1).sort({ time: -1 });
+        })
 
         reply._id = id;
 
@@ -156,14 +159,16 @@ async function database(app) {
         })
     }
 
+
+
     //get posts
     async function getPosts(index) {
         if (index.second == 0)
-            return await Post.find({ category: index.first }, (err, res) => {
+            return await Post.find({ category: index.first }, async(err, res) => {
                 if (err) console.log(err);
                 return res;
             })
-        else return await Post.find({ category: index.first, sub_category: index.second }, (err, res) => {
+        else return await Post.find({ category: index.first, sub_category: index.second }, async(err, res) => {
             if (err) console.log(err);
             return res;
         })
@@ -171,8 +176,10 @@ async function database(app) {
 
     //get post
     async function getPost(postId) {
-        return await Post.findOne({ _id: postId }, (err, res) => {
+        return await Post.findOne({ _id: postId }, async(err, res) => {
             if (err) console.log(err)
+
+            res.replies = await getReplies(postId);
             return res;
         })
     }

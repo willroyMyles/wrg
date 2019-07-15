@@ -94,10 +94,16 @@ module.exports = async(app, db) => {
 
     async function formatPostsToCard(posts) {
         var cardInfo = [];
-        //console.log(moment(Date(), "hh:mm"));
+
+
+        var dateformat = require('dateformat');
+        var ta = require('time-ago');
 
         for (let index = 0; index < posts.length; index++) {
             const element = posts[index];
+
+            var time = new Date(element.time);
+            let time2 = dateformat(time, "ddd mmm d yyyy  |  hh:mm tt  •  ")
 
             var cardData = {};
             var newbod = String(element.body).split('>')[1] + "...";
@@ -105,11 +111,15 @@ module.exports = async(app, db) => {
             cardData.body = newbod;
             cardData.category = app.parts[element.category][element.sub_category];
             cardData.username = (await db.getUserName(element.userId)).username;
-            cardData.time = element.time; //moment(element.time).format("LLLL  LT")
+            cardData.time = time2 + "" + ta.ago(element.time);
             cardData.make = element.make;
             cardData.model = element.model;
             cardData.year = element.year;
             cardData.id = element._id;
+            var results = await db.getReplies(element._id)
+            var count = results.names.length;
+            console.log(count);
+            cardData.repliesCount = count;
             cardInfo.push(cardData);
 
         }

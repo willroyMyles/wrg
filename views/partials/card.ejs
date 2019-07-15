@@ -1,5 +1,5 @@
 <div class="container personal-card">
-    <div class="row">
+    <div class="row no-padding">
         <div class="col col-md-8">
             <div class=" row title text-capitalize">
                 <div class="col col-md-10">
@@ -18,7 +18,7 @@
             </div>
 
             <div class="row my-1">
-                <div class="col col-md-7 text-muted">
+                <div class="col col-md-8 text-muted">
                     <div class="small-text">posted by -
                         <a href="">
                             <%- info.username %>
@@ -27,6 +27,11 @@
                     <div class="small-text">
                         <%- info.time%>
                     </div>
+                </div>
+            </div>
+            <div class="row no-padding">
+                <div class="col-md-12 text-muted ">
+                    <div alt="replies"><small><%- info.repliesCount %></small> <i class="fas fa-comments    "></i></div>
                 </div>
             </div>
         </div>

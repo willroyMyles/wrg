@@ -156,8 +156,13 @@ button:focus {
 .personal-card {
     background-color: white;
     padding: 10px;
+    padding-bottom: 2px;
     border-radius: 5px;
     border: 1px solid rgba(139, 139, 139, 0.11);
+}
+
+.no-padding {
+    padding: 3px 5px 2px 13px;
 }
 
 .personal-post {
@@ -170,13 +175,19 @@ button:focus {
 }
 
 .personal-comment {
-    background-color: white;
     margin-top: 10px;
-    padding: 10px;
+    /* padding: 10px;
     padding-left: 20px;
-    padding-right: 20px;
+    padding-right: 20px; */
+    border: 0px solid rgba(139, 139, 139, 0.11);
+}
+
+.comment {
+    margin-top: 3px;
     border-radius: 5px;
-    border: 1px solid rgba(139, 139, 139, 0.11);
+    background-color: white;
+    border: 1px solid rgba(236, 236, 236, 0.404);
+    padding: 10px 10px 5px 10px;
 }
 
 .title a {

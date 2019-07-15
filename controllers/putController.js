@@ -1,4 +1,5 @@
 module.exports = async(app, db) => {
+    var fs = require('fs');
 
     app.put('/posts/:id', async(req, res) => {
 
@@ -19,6 +20,8 @@ module.exports = async(app, db) => {
         if (replies.res) {
             count = Array.from(replies.res).length
         } else count = 0;
-        res.send({ replies: replies, count: count })
+
+        var string = fs.readFileSync('views/partials/replies.ejs', 'utf-8')
+        res.send({ replies: replies, count: count, str: string })
     })
 }
