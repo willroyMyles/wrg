@@ -8,6 +8,7 @@ import {
 	getUserData,
 	sendReply,
 	getReplies,
+	setOnlineDatabase,
 } from "../api_layer/Api_version_1"
 import {localStorageStrings} from "../components/helpers/Helpers_Index"
 import eventEmitter, {eventStrings} from "../components/helpers/EventEmitters"
@@ -158,6 +159,9 @@ class Store {
 		})
 	}
 
+	@action setUseOnlineDataBase = (value: boolean) => {
+		setOnlineDatabase(value)
+	}
 	@action login = (data: any) => {
 		return new Promise((resolve, reject) => {
 			login(data)

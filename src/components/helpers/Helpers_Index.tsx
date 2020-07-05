@@ -191,4 +191,5 @@ export const localStorageStrings = {
 	user_name: "user name",
 	user_id: "user id",
 	user_logged_in: "am i logged in bro?",
+	use_online_database: "this is to tell the backend weather to use online or offline database",
 }

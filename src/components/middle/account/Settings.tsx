@@ -1,7 +1,15 @@
-import React from "react"
+import React, {useState, useEffect} from "react"
 import Motioner from "../../helpers/Motioner"
-import {Row, Button, notification, Space, Layout, Input, Col, Divider} from "antd"
-import {sideHistory, TextParaGraph, TextSubHeading, TextHeading, TextSection} from "../../helpers/Helpers_Index"
+import {Row, Button, notification, Space, Layout, Input, Col, Divider, Switch} from "antd"
+import {
+	sideHistory,
+	TextParaGraph,
+	TextSubHeading,
+	TextHeading,
+	TextSection,
+	TextHint,
+	localStorageStrings,
+} from "../../helpers/Helpers_Index"
 import {ConfirmButton} from "../../left/Left_Bottom"
 import {refreshStyles} from "less"
 import Text from "antd/lib/typography/Text"
@@ -12,6 +20,18 @@ import dataExchanger from "../../../data_layer/DataExchange"
 import eventEmitter, {eventStrings} from "../../helpers/EventEmitters"
 
 const Settings = observer(() => {
+	const [onlineDatabase, setonlineDatabase] = useState(false)
+
+	const handleToggle = (value: boolean) => {
+		setonlineDatabase(value)
+		dataExchanger.setUseOnlineDataBase(value)
+		localStorage.setItem(localStorageStrings.use_online_database, String(onlineDatabase).toString())
+	}
+
+	useEffect(() => {
+		setonlineDatabase(Boolean(localStorage.getItem(localStorageStrings.use_online_database)))
+	}, [])
+
 	return (
 		<Motioner>
 			{dataExchanger.isLoggedIn() && (
@@ -93,6 +113,12 @@ const Settings = observer(() => {
 						</Row>
 						<Row>
 							<Button onClick={() => {}}>change</Button>
+						</Row>
+						<Row>
+							<Col>
+								<TextHint>online database</TextHint>
+								<Switch checked={onlineDatabase} onChange={handleToggle} />
+							</Col>
 						</Row>
 					</Space>
 				</>

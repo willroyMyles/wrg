@@ -26,6 +26,11 @@ export const sendCreatePost = (data: any) => {
 	})
 }
 
+export const setOnlineDatabase = (values: boolean) => {
+	const data = {value: values}
+	axios.post(url + "online", stringify(data))
+}
+
 export const getPosts = (offset: number, limit: number) => {
 	const headers: AxiosRequestConfig = {
 		headers: {

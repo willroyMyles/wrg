@@ -15,10 +15,11 @@ import eventEmitter, {eventStrings} from "../../helpers/EventEmitters"
 
 export const Content_List_2 = (props: any) => {
 	const [morePost, setMorePost] = useState(true)
-	const [data, setData] = useState<any>([])
+	const [data, setData] = useState<any[]>([])
 	const [visible, setVisible] = useState(false)
-	const [loading, setLoading] = useState(false)
+	const [loading, setLoading] = useState(true)
 	const [currentIndex, setCurrentIndex] = useState<number | null>(-1)
+	const [timeToggle, setTimeToggle] = useState(true)
 
 	const {id} = useParams()
 	const bp = useBreakpoint()
@@ -69,8 +70,22 @@ export const Content_List_2 = (props: any) => {
 		})
 	}
 
+	const sortByTime = () => {
+		setLoading(true)
+		setTimeToggle(!timeToggle)
+		const d = data.sort((a: any, b: any) => {
+			const val = a.time > b.time ? -1 : 1
+			return timeToggle ? val : val * -1
+		})
+		setData(d)
+		setLoading(false)
+	}
+
 	return (
 		<Row id="row" style={{width: "100%", minHeight: "90vh"}}>
+			<Row style={{padding: 10}}>
+				<Button onClick={() => sortByTime()}>sort by time</Button>
+			</Row>
 			<List
 				style={{width: "100%", padding: bp.sm ? 0 : bp.xs ? 0 : 25}}
 				dataSource={data}
