@@ -35,7 +35,7 @@ const ReplyBox = ({item}: {item: any}) => {
 				{dataExchanger.isLoggedIn() && (
 					<Comment
 						style={{width: "100%"}}
-						avatar={<Avatar name={dataExchanger.username} />}
+						// avatar={<Avatar name={dataExchanger.username} />}
 						content={
 							<div>
 								<TextArea

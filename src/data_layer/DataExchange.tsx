@@ -52,6 +52,10 @@ class Store {
 		return element
 	}
 
+	addToList = (data: any[], id: string) => {
+		this.listOfReplies.set(id, data)
+	}
+
 	@action getPosts = () => {
 		return new Promise((resolve) => {
 			getPosts(this.postOffset, this.postLimit)
@@ -97,42 +101,30 @@ class Store {
 		return new Promise((resolve) => {
 			sendReply(value, postId, this.username)
 				.then((res) => {
-					// resolve(this.updatePost(postId, value))
-					this.updatePost(postId, value).then((res) => {
-						resolve(getReplies(postId))
+					this.updatePost(postId, res).then((res) => {
+						resolve(true)
 					})
-					// accept an updated post
-					console.log(res)
 				})
 				.catch((err) => resolve(false))
 		})
 	}
 
-	updatePost = (postId: string, reply: string) =>
+	updatePost = (postId: string, reply: any) =>
 		new Promise((resolve) => {
-			const posts = this.postData.get(postId) // array of ids
-			posts?.replies.push(reply)
-			this.postData.set(postId, posts || [])
-			// this.listOfReplies.set(postId, posts.replies)
+			const post = this.postData.get(postId) // array of ids
+			post?.replies.push(reply)
+			post?.replies.sort((a: any, b: any) => a.date - b.date)
+
+			this.postData.set(postId, post)
 			resolve(true)
 		})
 
 	@action getReplies = (postId: string) => {
 		return new Promise((resolve) => {
-			// if (this.listOfReplies.has(ids[0])) {
-			// 	resolve(true)
-			// 	return
-			// }
-
 			getReplies(postId)
 				.then((res: any) => {
-					var d: any[] = []
-					res.forEach((element: {_id: string; body: any}) => {
-						d.push(element)
-						console.log(element.body)
-					})
-					this.listOfReplies.set(postId, d)
-
+					//gets an array replies data
+					this.addToList(res, postId)
 					resolve(true)
 				})
 				.catch((err) => {

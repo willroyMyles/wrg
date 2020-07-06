@@ -7,6 +7,7 @@ import {theme} from "../../../Theme"
 import ReplyBox from "../holders/ReplyBox"
 import CommentBox from "../holders/CommentBox"
 import eventEmitter, {eventStrings} from "../../helpers/EventEmitters"
+import ReplyView from "../holders/ReplyView"
 
 interface Props {
 	item: any
@@ -107,11 +108,12 @@ class Content_View_Post extends Component<Props> {
 				<Row justify="end"></Row>
 
 				<Row>
-					<Col md={3} />
-					<Col md={21}>
+					<Col md={0} />
+					<Col md={24}>
 						<Row style={{width: "100%"}}>
 							<ReplyBox item={this.item} />
-							{this.state.showReplies && <CommentBox replies={this.item.replies} postId={this.item._id} />}
+							{/* {this.state.showReplies && <CommentBox replies={this.item.replies} postId={this.item._id} />} */}
+							{this.state.showReplies && <ReplyView postId={this.item._id} />}
 						</Row>
 					</Col>
 				</Row>

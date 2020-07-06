@@ -136,7 +136,7 @@ interface AAVProps {
 export const AAvatar = (props: AAVProps) => {
 	return (
 		<div>
-			<Motioner motion={{whileHover: {scale: 2.1}}}>
+			<Motioner motion={{whileHover: {scale: 1.1}}}>
 				<Tooltip mouseEnterDelay={1.5} title={`view ${props.item.username} profile`}>
 					<div
 						style={{cursor: "pointer"}}

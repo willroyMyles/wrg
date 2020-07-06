@@ -1,10 +1,11 @@
 import React, {Component} from "react"
 import Motioner from "../../helpers/Motioner"
-import {Row, Empty, message, Col, List} from "antd"
+import {Row, Empty, message, Col, List, Divider} from "antd"
 import {TextSubHeading, TextHint, TextParaGraph} from "../../helpers/Helpers_Index"
 import dataExchanger from "../../../data_layer/DataExchange"
 import eventEmitter, {eventStrings} from "../../helpers/EventEmitters"
 import {Avatar} from "evergreen-ui"
+import moment from "moment"
 
 class CommentBox extends Component<{postId: string; replies: any[]}> {
 	state = {
@@ -60,7 +61,7 @@ class CommentBox extends Component<{postId: string; replies: any[]}> {
 				{this.state.data.length != 0 && (
 					<div>
 						<Row>
-							<TextHint>comments</TextHint>
+							<TextSubHeading>comments</TextSubHeading>
 						</Row>
 						<Row style={{marginTop: 10}}>
 							<List
@@ -73,14 +74,21 @@ class CommentBox extends Component<{postId: string; replies: any[]}> {
 										<List.Item key={index}>
 											<Motioner>
 												<Row>
-													<Col>
-														<Avatar name={item.username} />
-														<TextHint>{item.name}</TextHint>
-													</Col>
+													<Avatar name={item.username} style={{marginRight: 5}} />
+													<TextHint>{item.username}</TextHint>
 												</Row>
 												<Row>
 													<Col>
 														<TextParaGraph>{item.body}</TextParaGraph>
+													</Col>
+												</Row>
+												<Row>
+													<Col>
+														<TextHint>{moment(item.date).fromNow()}</TextHint>
+													</Col>
+													<Divider type="vertical" />
+													<Col>
+														<TextHint>Report</TextHint>
 													</Col>
 												</Row>
 											</Motioner>

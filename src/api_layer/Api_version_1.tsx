@@ -115,7 +115,7 @@ export const sendReply = (reply: string, postId: string, username: string) =>
 		axios
 			.post(url + "reply", stringify(data))
 			.then((res) => {
-				console.log(res)
+				//gets back the reply
 
 				resolve(res.data)
 			})
