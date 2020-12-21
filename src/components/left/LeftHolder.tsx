@@ -2,12 +2,41 @@ import React from "react"
 
 import Left_Middle from "./Left_Middle"
 import Left_Bottom from "./Left_Bottom"
-import {theme} from "../../Theme"
-import {Row, Button} from "antd"
+import { theme } from "../../Theme"
+import { Row, Button } from "antd"
 import useBreakpoint from "antd/lib/grid/hooks/useBreakpoint"
-import eventEmitter, {eventStrings} from "../helpers/EventEmitters"
+import eventEmitter, { eventStrings } from "../helpers/EventEmitters"
+import { useCMS, useForm, usePlugin } from "tinacms"
+import { getAllAuthors } from "../../api_layer/API_Strapi"
+
+const formConfig = {
+    id: 'tina-tutorial-index',
+    label: 'Edit Page',
+    fields: [
+      {
+        name: 'title',
+        label: 'Title',
+        component: 'text',
+      },
+      {
+        name: 'body',
+        label: 'Body',
+        component: 'textarea',
+      },
+    ],
+    initialValues: [],
+    onSubmit: async () => {
+      window.alert('Saved!')
+    },
+  }
+
 
 const LeftHolder = () => {
+	const cms = useCMS()
+	const [editableData, form] = useForm(formConfig)
+	usePlugin(form)
+	// cms.plugins.add(form)
+
 	return (
 		<Row
 			// align="middle"
@@ -28,6 +57,11 @@ const LeftHolder = () => {
 			<div />
 			<Button onClick={() => eventEmitter.emit(eventStrings.showFeedback)} type="primary">
 				feedback
+			</Button>
+		<div>{editableData.title}</div>
+		{/* <div>{getAllAuthors()}</div> */}
+			<Button onClick={() => cms.toggle()} type="primary">
+				cms
 			</Button>
 			{/* <Left_Top /> */}
 		</Row>
