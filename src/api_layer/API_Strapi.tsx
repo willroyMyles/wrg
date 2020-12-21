@@ -22,10 +22,12 @@ export const getAllAuthors = async () => new Promise(async (resolve, reject)=>{
 })
 
 export const getAllCategories = () => new Promise<any[]>(async (resolve, reject)=>{
+    const cat = "categories"
     const results = await fetchGraphql(processEnv.strapi,`query{
-        categories{
+        ${cat}{
        id
        title
+       sub
      }
    }` );
 

@@ -11,10 +11,14 @@ import { DescText } from "../account/Profile_View_Other";
 import { TextHeading, TextSection } from "../../helpers/Helpers_Index";
 import { useCMS } from "tinacms";
 import { getAllCategories } from "../../../api_layer/API_Strapi";
+import { useHistory } from "react-router-dom";
 const Content_Category = observer(() => {
   const [data, setData] = useState(dataExchanger.statictics);
   const [loading, setLoading] = useState(false);
+
+  const nav = useHistory()
 	const [cat, setcat] = useState<string[]>([])
+	const [subs, setsubs] = useState<any[]>([])
   const cms = useCMS();
 	
   useEffect(() => {
@@ -23,8 +27,9 @@ const Content_Category = observer(() => {
 	});
 	getAllCategories().then(res=>{
 		const titles = res.map(a=>a.title);
-		console.log(titles);
-		setcat(titles)
+		const subs = res.map(a => a.sub)
+		setcat(titles);
+		setsubs(subs)
 	})
 
     dataExchanger.getStatictics().then((res) => {
@@ -47,7 +52,8 @@ const Content_Category = observer(() => {
           return (
             <Col span={24}>
               <div
-                onClick={() => eventEmitter.emit(eventStrings.category, index)}
+				// onClick={() => eventEmitter.emit(eventStrings.category, index)}
+				onClick={() => nav.push("/category/"+index, {subs:subs[index]})}
                 style={{
                   margin: 17,
                   padding: 10,

@@ -184,7 +184,7 @@ export const motionValues = {
 		stiffness: 300,
 	},
 
-	transition: {duration: 0.3},
+	transition: {duration: 0.0},
 }
 
 export const localStorageStrings = {

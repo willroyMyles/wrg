@@ -33,8 +33,8 @@ function App() {
   });
 
   const cms = new TinaCMS({
-	toolbar: true,
-	enabled:true,
+	sidebar: true,
+  enabled:false,
 	apis: {
 		strapi: new StrapiClient("http://localhost:1337"),
 	  },
